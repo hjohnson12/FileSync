@@ -32,23 +32,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFileSync));
             this.btnStartSync = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.sourceLabel = new System.Windows.Forms.Label();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.lblSrc = new System.Windows.Forms.Label();
+            this.dialogChooseSrcFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.destinationLabel = new System.Windows.Forms.Label();
+            this.lblDest = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.sourceListBox = new System.Windows.Forms.ListBox();
+            this.lstBoxSrc = new System.Windows.Forms.ListBox();
             this.sourceFolderPictureBox = new System.Windows.Forms.PictureBox();
             this.btnStopSync = new System.Windows.Forms.Button();
-            this.elapsedTimeLabel = new System.Windows.Forms.Label();
-            this.syncStartedLabel = new System.Windows.Forms.Label();
+            this.lblElapsedTime = new System.Windows.Forms.Label();
+            this.lblSyncStarted = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.destinationFolderPictureBox = new System.Windows.Forms.PictureBox();
-            this.destinationListBox = new System.Windows.Forms.ListBox();
-            this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
+            this.lstBoxDestination = new System.Windows.Forms.ListBox();
+            this.dialogChooseDestFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.btnMoveDirectory = new System.Windows.Forms.Button();
             this.btnDeleteDirectory = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -79,14 +79,14 @@
             this.fileSystemWatcher1.SynchronizingObject = this;
             this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
             // 
-            // sourceLabel
+            // lblSrc
             // 
-            this.sourceLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.sourceLabel.Location = new System.Drawing.Point(134, 31);
-            this.sourceLabel.Name = "sourceLabel";
-            this.sourceLabel.Size = new System.Drawing.Size(446, 29);
-            this.sourceLabel.TabIndex = 1;
-            this.sourceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSrc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSrc.Location = new System.Drawing.Point(134, 31);
+            this.lblSrc.Name = "lblSrc";
+            this.lblSrc.Size = new System.Drawing.Size(446, 29);
+            this.lblSrc.TabIndex = 1;
+            this.lblSrc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -124,20 +124,20 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Choose a folder:";
             // 
-            // destinationLabel
+            // lblDest
             // 
-            this.destinationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.destinationLabel.Location = new System.Drawing.Point(127, 31);
-            this.destinationLabel.Name = "destinationLabel";
-            this.destinationLabel.Size = new System.Drawing.Size(446, 29);
-            this.destinationLabel.TabIndex = 5;
-            this.destinationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDest.Location = new System.Drawing.Point(127, 31);
+            this.lblDest.Name = "lblDest";
+            this.lblDest.Size = new System.Drawing.Size(446, 29);
+            this.lblDest.TabIndex = 5;
+            this.lblDest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.sourceListBox);
+            this.groupBox1.Controls.Add(this.lstBoxSrc);
             this.groupBox1.Controls.Add(this.sourceFolderPictureBox);
-            this.groupBox1.Controls.Add(this.sourceLabel);
+            this.groupBox1.Controls.Add(this.lblSrc);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -147,14 +147,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Source Directory";
             // 
-            // sourceListBox
+            // lstBoxSrc
             // 
-            this.sourceListBox.FormattingEnabled = true;
-            this.sourceListBox.HorizontalScrollbar = true;
-            this.sourceListBox.Location = new System.Drawing.Point(13, 66);
-            this.sourceListBox.Name = "sourceListBox";
-            this.sourceListBox.Size = new System.Drawing.Size(567, 121);
-            this.sourceListBox.TabIndex = 10;
+            this.lstBoxSrc.FormattingEnabled = true;
+            this.lstBoxSrc.HorizontalScrollbar = true;
+            this.lstBoxSrc.Location = new System.Drawing.Point(13, 66);
+            this.lstBoxSrc.Name = "lstBoxSrc";
+            this.lstBoxSrc.Size = new System.Drawing.Size(567, 121);
+            this.lstBoxSrc.TabIndex = 10;
             // 
             // sourceFolderPictureBox
             // 
@@ -177,31 +177,31 @@
             this.btnStopSync.UseVisualStyleBackColor = true;
             this.btnStopSync.Click += new System.EventHandler(this.btnStopSync_Click);
             // 
-            // elapsedTimeLabel
+            // lblElapsedTime
             // 
-            this.elapsedTimeLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.elapsedTimeLabel.Location = new System.Drawing.Point(520, 220);
-            this.elapsedTimeLabel.Name = "elapsedTimeLabel";
-            this.elapsedTimeLabel.Size = new System.Drawing.Size(193, 29);
-            this.elapsedTimeLabel.TabIndex = 1;
-            this.elapsedTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblElapsedTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblElapsedTime.Location = new System.Drawing.Point(520, 220);
+            this.lblElapsedTime.Name = "lblElapsedTime";
+            this.lblElapsedTime.Size = new System.Drawing.Size(193, 29);
+            this.lblElapsedTime.TabIndex = 1;
+            this.lblElapsedTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // syncStartedLabel
+            // lblSyncStarted
             // 
-            this.syncStartedLabel.AutoSize = true;
-            this.syncStartedLabel.Location = new System.Drawing.Point(719, 228);
-            this.syncStartedLabel.Name = "syncStartedLabel";
-            this.syncStartedLabel.Size = new System.Drawing.Size(74, 13);
-            this.syncStartedLabel.TabIndex = 0;
-            this.syncStartedLabel.Text = "Sync Stopped";
+            this.lblSyncStarted.AutoSize = true;
+            this.lblSyncStarted.Location = new System.Drawing.Point(719, 228);
+            this.lblSyncStarted.Name = "lblSyncStarted";
+            this.lblSyncStarted.Size = new System.Drawing.Size(74, 13);
+            this.lblSyncStarted.TabIndex = 0;
+            this.lblSyncStarted.Text = "Sync Stopped";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.destinationFolderPictureBox);
-            this.groupBox2.Controls.Add(this.destinationListBox);
+            this.groupBox2.Controls.Add(this.lstBoxDestination);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.destinationLabel);
+            this.groupBox2.Controls.Add(this.lblDest);
             this.groupBox2.Location = new System.Drawing.Point(632, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(579, 198);
@@ -220,14 +220,14 @@
             this.destinationFolderPictureBox.TabStop = false;
             this.destinationFolderPictureBox.Click += new System.EventHandler(this.destinationFolderPictureBox_Click);
             // 
-            // destinationListBox
+            // lstBoxDestination
             // 
-            this.destinationListBox.FormattingEnabled = true;
-            this.destinationListBox.HorizontalScrollbar = true;
-            this.destinationListBox.Location = new System.Drawing.Point(6, 66);
-            this.destinationListBox.Name = "destinationListBox";
-            this.destinationListBox.Size = new System.Drawing.Size(567, 121);
-            this.destinationListBox.TabIndex = 5;
+            this.lstBoxDestination.FormattingEnabled = true;
+            this.lstBoxDestination.HorizontalScrollbar = true;
+            this.lstBoxDestination.Location = new System.Drawing.Point(6, 66);
+            this.lstBoxDestination.Name = "lstBoxDestination";
+            this.lstBoxDestination.Size = new System.Drawing.Size(567, 121);
+            this.lstBoxDestination.TabIndex = 5;
             // 
             // btnMoveDirectory
             // 
@@ -235,7 +235,7 @@
             this.btnMoveDirectory.Name = "btnMoveDirectory";
             this.btnMoveDirectory.Size = new System.Drawing.Size(89, 35);
             this.btnMoveDirectory.TabIndex = 11;
-            this.btnMoveDirectory.Text = "Move Directory";
+            this.btnMoveDirectory.Text = "Move Source Directory";
             this.btnMoveDirectory.UseVisualStyleBackColor = true;
             this.btnMoveDirectory.Click += new System.EventHandler(this.btnMoveDirectory_Click);
             // 
@@ -245,7 +245,7 @@
             this.btnDeleteDirectory.Name = "btnDeleteDirectory";
             this.btnDeleteDirectory.Size = new System.Drawing.Size(92, 35);
             this.btnDeleteDirectory.TabIndex = 12;
-            this.btnDeleteDirectory.Text = "Delete Directory";
+            this.btnDeleteDirectory.Text = "Delete Source Directory";
             this.btnDeleteDirectory.UseVisualStyleBackColor = true;
             this.btnDeleteDirectory.Click += new System.EventHandler(this.btnDeleteDirectory_Click);
             // 
@@ -290,10 +290,10 @@
             this.Controls.Add(this.btnStopSync);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.elapsedTimeLabel);
+            this.Controls.Add(this.lblElapsedTime);
             this.Controls.Add(this.btnStartSync);
             this.Controls.Add(this.btnDeleteDirectory);
-            this.Controls.Add(this.syncStartedLabel);
+            this.Controls.Add(this.lblSyncStarted);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnMoveDirectory);
             this.Name = "frmFileSync";
@@ -316,25 +316,25 @@
 
         private System.Windows.Forms.Button btnStartSync;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private System.Windows.Forms.Label sourceLabel;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Label lblSrc;
+        private System.Windows.Forms.FolderBrowserDialog dialogChooseSrcFolder;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label destinationLabel;
+        private System.Windows.Forms.Label lblDest;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
+        private System.Windows.Forms.FolderBrowserDialog dialogChooseDestFolder;
         private System.Windows.Forms.Button btnMoveDirectory;
         private System.Windows.Forms.Button btnDeleteDirectory;
-        private System.Windows.Forms.ListBox destinationListBox;
+        private System.Windows.Forms.ListBox lstBoxDestination;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label syncStartedLabel;
-        private System.Windows.Forms.Label elapsedTimeLabel;
+        private System.Windows.Forms.Label lblSyncStarted;
+        private System.Windows.Forms.Label lblElapsedTime;
         private System.Windows.Forms.PictureBox sourceFolderPictureBox;
         private System.Windows.Forms.PictureBox destinationFolderPictureBox;
-        private System.Windows.Forms.ListBox sourceListBox;
+        private System.Windows.Forms.ListBox lstBoxSrc;
         private System.Windows.Forms.Button btnStopSync;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel2;

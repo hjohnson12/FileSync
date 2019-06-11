@@ -13,7 +13,7 @@ namespace FileSync
 {
     public partial class frmFileSync : Form
     {
-        string sourcePath, destinationPath;
+        string srcPath, destPath;
 
         public frmFileSync()
         {
@@ -25,7 +25,7 @@ namespace FileSync
             // call CopyDirectory() when a change in the specified directory happens
             try
             {
-                CopyDirectory(sourcePath, destinationPath);
+                CopyDirectory(srcPath, destPath);
             }
             catch (Exception ex)
             {
@@ -37,21 +37,21 @@ namespace FileSync
         {
             try
             {
-                if(sourceLabel.Text == "" || destinationLabel.Text == "")
+                if(lblSrc.Text == "" || lblDest.Text == "")
                 {
                     MessageBox.Show("Please enter a source path and destination path.", "Choose Path", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    syncStartedLabel.Text = "Sync Started";
+                    lblSyncStarted.Text = "Sync Started";
 
                     // Set the source path for the file system watcher control
-                    fileSystemWatcher1.Path = sourcePath;
+                    fileSystemWatcher1.Path = srcPath;
                     fileSystemWatcher1.EnableRaisingEvents = true;
                     timer1.Start();
 
                     // call CopyDirectory to automatically copy the directory at the given point
-                    CopyDirectory(sourcePath, destinationPath);
+                    CopyDirectory(srcPath, destPath);
                 }
             }
             catch(Exception ex)
@@ -67,8 +67,8 @@ namespace FileSync
 
             // stop the stopwatch
             timer1.Stop();
-            elapsedTimeLabel.Text = "Sync last refreshed at: " + DateTime.Now.ToLongTimeString();
-            syncStartedLabel.Text = "Sync Stopped";
+            lblElapsedTime.Text = "Sync last refreshed at: " + DateTime.Now.ToLongTimeString();
+            lblSyncStarted.Text = "Sync Stopped";
         }
 
         private void btnMoveDirectory_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace FileSync
             try
             {
                 // Move contents from source folder to dest folder
-                MoveDirectory(sourcePath, destinationPath);
+                MoveDirectory(srcPath, destPath);
             }
             catch(Exception ex)
             {
@@ -98,7 +98,7 @@ namespace FileSync
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            elapsedTimeLabel.Text = "Sync refreshed at: " + DateTime.Now.ToLongTimeString();
+            lblElapsedTime.Text = "Sync refreshed at: " + DateTime.Now.ToLongTimeString();
         }
 
         private void sourceFolderPictureBox_Click(object sender, EventArgs e)
@@ -116,22 +116,22 @@ namespace FileSync
             MinimizeBox = false;
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            syncStartedLabel.Text = "Sync Stopped";
+            lblSyncStarted.Text = "Sync Stopped";
         }
 
         private void CopyDirectory(string source, string target)
         {
             // variables
-            string sourcePath = source.TrimEnd('\\', ' ');  // trims the source path
-            string destinationPath = target.TrimEnd('\\', ' ');  // trims the destination path
-            var files = Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories).GroupBy(s => Path.GetDirectoryName(s));
-            destinationListBox.Items.Clear();
-            sourceListBox.Items.Clear();
+            string srcPath = source.TrimEnd('\\', ' ');  // trims the source path
+            string destPath = target.TrimEnd('\\', ' ');  // trims the destination path
+            var files = Directory.EnumerateFiles(srcPath, "*", SearchOption.AllDirectories).GroupBy(s => Path.GetDirectoryName(s));
+            lstBoxDestination.Items.Clear();
+            lstBoxSrc.Items.Clear();
 
             // iterate through each folder
             foreach (var folder in files)
             {
-                string targetFolder = folder.Key.Replace(sourcePath, destinationPath);
+                string targetFolder = folder.Key.Replace(srcPath, destPath);
                 Directory.CreateDirectory(targetFolder);
 
                 // iterate through each file 
@@ -148,8 +148,8 @@ namespace FileSync
                     // copy the file
                     File.Copy(file, targetFile);
 
-                    destinationListBox.Items.Add(targetFile);
-                    sourceListBox.Items.Add(file);    
+                    lstBoxDestination.Items.Add(targetFile);
+                    lstBoxSrc.Items.Add(file);    
                 }
             }
         }
@@ -159,10 +159,10 @@ namespace FileSync
             try
             {
                 // use the DirectoryInfo instance method.
-                System.IO.DirectoryInfo sourceDi = new System.IO.DirectoryInfo(sourcePath);
+                System.IO.DirectoryInfo sourceDir = new System.IO.DirectoryInfo(srcPath);
 
                 // delete the directory and all subdirs
-                sourceDi.Delete(true);
+                sourceDir.Delete(true);
             }
             catch (Exception ex)
             {
@@ -172,14 +172,14 @@ namespace FileSync
 
         public void MoveDirectory(string source, string target)
         {
-            string sourcePath = source.TrimEnd('\\', ' ');  // trims the source path
-            string destinationPath = target.TrimEnd('\\', ' ');  // trims the destination path
-            var files = Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories).GroupBy(s => Path.GetDirectoryName(s));
+            string srcPath = source.TrimEnd('\\', ' ');  // trims the source path
+            string destPath = target.TrimEnd('\\', ' ');  // trims the destination path
+            var files = Directory.EnumerateFiles(srcPath, "*", SearchOption.AllDirectories).GroupBy(s => Path.GetDirectoryName(s));
 
             // iterate through each folder
             foreach (var folder in files)
             {
-                string targetFolder = folder.Key.Replace(sourcePath, destinationPath);
+                string targetFolder = folder.Key.Replace(srcPath, destPath);
                 Directory.CreateDirectory(targetFolder);
 
                 // iterate through each file 
@@ -195,8 +195,8 @@ namespace FileSync
                     }
                     // move the file
                     File.Move(file, targetFile);
-                    destinationListBox.Items.Add(targetFile);
-                    sourceListBox.Items.Add(file);
+                    lstBoxDestination.Items.Add(targetFile);
+                    lstBoxSrc.Items.Add(file);
                 }
             }
             // Delete the initial source directory
@@ -206,21 +206,21 @@ namespace FileSync
         public void ChooseSourceFolder()
         {
             // if the user made a selection
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (dialogChooseSrcFolder.ShowDialog() == DialogResult.OK)
             {
                 // set the selected path to the source path
-                sourcePath = folderBrowserDialog1.SelectedPath;
-                sourceLabel.Text = sourcePath;
+                srcPath = dialogChooseSrcFolder.SelectedPath;
+                lblSrc.Text = srcPath;
             }
         }
         public void ChooseDestinationFolder()
         {
             // if the user made a selection
-            if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
+            if (dialogChooseDestFolder.ShowDialog() == DialogResult.OK)
             {
                 // set the selected path to the destination paths
-                destinationPath = folderBrowserDialog2.SelectedPath;
-                destinationLabel.Text = destinationPath;
+                destPath = dialogChooseDestFolder.SelectedPath;
+                lblDest.Text = destPath;
             }
         }     
     }
