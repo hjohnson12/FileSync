@@ -141,10 +141,8 @@ namespace FileSync
 
                     // check if the target file exists
                     if (File.Exists(targetFile))
-                    {
-                        // delete the target file 
-                        File.Delete(targetFile);
-                    }
+                        File.Delete(targetFile); // delete the target file 
+                   
                     // copy the file
                     File.Copy(file, targetFile);
 
@@ -189,10 +187,8 @@ namespace FileSync
                     
                     // check if the target file exists
                     if (File.Exists(targetFile))
-                    {
-                        // delete the target file 
-                        File.Delete(targetFile);
-                    }
+                        File.Delete(targetFile);  // delete target file 
+
                     // move the file
                     File.Move(file, targetFile);
                     lstBoxDestination.Items.Add(targetFile);
