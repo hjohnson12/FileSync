@@ -9,7 +9,7 @@ Made as part of a final project in *Fall 2016* for an introduction t dkestop app
 
 Other projects created for the final include (all created with C# Windows Forms):
 
-* Simple login program using a SQL local database with Visual Studio. This solution contains each one of the other 3 projects created for the final as a separate form once the user logs in.  
+* Simple login program using a SQL local database with Visual Studio. The solution contains each one of the other 3 projects created for the final as a separate form once the user logs in.  
 ***Link to source***: https://github.com/hjohnson12/LoginPanel
   * ***NOTE***: If there are any updates to *FtpConnect*, *TextEditor*, and *FileSync*, they will be done in the according repositories. 
   * May update the repositories to include Windows 10 Universal Windows Platform controls once Xaml Islands fully releases
